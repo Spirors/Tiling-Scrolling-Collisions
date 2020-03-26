@@ -52,8 +52,8 @@ export class WebGLGameSpriteRenderer extends WebGLGameRenderingComponent {
         // CALCULATE HOW MUCH TO TRANSLATE THE QUAD PER THE SPRITE POSITION
         let spriteWidth : number = spriteType.getSpriteWidth();
         let spriteHeight : number = spriteType.getSpriteHeight();
-        let spriteXInPixels : number = sprite.getPosition().getX() + (spriteWidth/2);
-        let spriteYInPixels : number = sprite.getPosition().getY() + (spriteHeight/2);
+        let spriteXInPixels : number = sprite.getPosition().getX() + (spriteWidth/2) - viewport.getX();
+        let spriteYInPixels : number = sprite.getPosition().getY() + (spriteHeight/2) - viewport.getY();
         let spriteXTranslate : number = ((spriteXInPixels - (canvasWidth/2))/(canvasWidth/2));
         let spriteYTranslate : number = ((spriteYInPixels - (canvasHeight/2))/(canvasHeight/2));
         this.meshTranslate.setX(spriteXTranslate);

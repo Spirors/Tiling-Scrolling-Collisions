@@ -2039,8 +2039,8 @@ var WebGLGameSpriteRenderer = function (_WebGLGameRenderingCo) {
             // CALCULATE HOW MUCH TO TRANSLATE THE QUAD PER THE SPRITE POSITION
             var spriteWidth = spriteType.getSpriteWidth();
             var spriteHeight = spriteType.getSpriteHeight();
-            var spriteXInPixels = sprite.getPosition().getX() + spriteWidth / 2;
-            var spriteYInPixels = sprite.getPosition().getY() + spriteHeight / 2;
+            var spriteXInPixels = sprite.getPosition().getX() + spriteWidth / 2 - viewport.getX();
+            var spriteYInPixels = sprite.getPosition().getY() + spriteHeight / 2 - viewport.getY();
             var spriteXTranslate = (spriteXInPixels - canvasWidth / 2) / (canvasWidth / 2);
             var spriteYTranslate = (spriteYInPixels - canvasHeight / 2) / (canvasHeight / 2);
             this.meshTranslate.setX(spriteXTranslate);
@@ -2949,28 +2949,28 @@ var UIController = function () {
                             //w
                             console.log("w");
                             if (viewport.getY() > 0) {
-                                viewport.inc(0, -1);
+                                viewport.inc(0, -3);
                             }
                             break;
                         case 65:
                             //a
                             console.log("a");
                             if (viewport.getX() > 0) {
-                                viewport.inc(-1, 0);
+                                viewport.inc(-3, 0);
                             }
                             break;
                         case 83:
                             //s
                             console.log("s");
                             if (viewport.getY() < viewport.getHeight()) {
-                                viewport.inc(0, 1);
+                                viewport.inc(0, 3);
                             }
                             break;
                         case 68:
                             //d
                             console.log("d");
                             if (viewport.getX() < viewport.getWidth()) {
-                                viewport.inc(1, 0);
+                                viewport.inc(3, 0);
                             }
                             break;
                     }
