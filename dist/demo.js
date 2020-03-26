@@ -2351,6 +2351,8 @@ var SceneGraph = function () {
                 }
             }
         }
+        // Need to modify according to viewport
+
     }, {
         key: "scope",
         value: function scope() {
@@ -2365,7 +2367,15 @@ var SceneGraph = function () {
                 for (var _iterator3 = this.animatedSprites[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
                     var sprite = _step3.value;
 
-                    this.visibleSet.push(sprite);
+                    var left_viewportX = this.viewport.getX();
+                    var top_viewportY = this.viewport.getY();
+                    var right_viewportX = this.viewport.getX() + this.viewport.getWidth();
+                    var bottom_viewportY = this.viewport.getY() + this.viewport.getHeight();
+                    var spriteX = sprite.getPosition().getX();
+                    var spriteY = sprite.getPosition().getY();
+                    if (spriteX > left_viewportX && spriteX < right_viewportX && spriteY > top_viewportY && spriteY < bottom_viewportY) {
+                        this.visibleSet.push(sprite);
+                    }
                 }
             } catch (err) {
                 _didIteratorError3 = true;

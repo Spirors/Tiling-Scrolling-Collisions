@@ -103,13 +103,24 @@ export class SceneGraph {
         }
     }
 
+    // Need to modify according to viewport
     public scope() : Array<SceneObject> {
         // CLEAR OUT THE OLD
         this.visibleSet = [];
 
         // PUT ALL THE SCENE OBJECTS INTO THE VISIBLE SET
         for (let sprite of this.animatedSprites) {
-            this.visibleSet.push(sprite);
+            let left_viewportX = this.viewport.getX();
+            let top_viewportY = this.viewport.getY();
+            let right_viewportX = this.viewport.getX() + this.viewport.getWidth();
+            let bottom_viewportY = this.viewport.getY() + this.viewport.getHeight();
+            let spriteX = sprite.getPosition().getX();
+            let spriteY = sprite.getPosition().getY();
+            
+            if (spriteX > left_viewportX && spriteX < right_viewportX &&
+                spriteY > top_viewportY && spriteY < bottom_viewportY) {
+                this.visibleSet.push(sprite);
+            }
         }
 
         return this.visibleSet;
