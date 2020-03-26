@@ -28,9 +28,17 @@ game.getResourceManager().loadScene(DESERT_SCENE_PATH,
     let world : TiledLayer[] = game.getSceneGraph().getTiledLayers();
     let worldWidth : number = world[0].getColumns() * world[0].getTileSet().getTileWidth();
     let worldHeight : number = world[0].getRows() * world[0].getTileSet().getTileHeight();
-    for (let i = 0; i < 100; i++) {
-        let type : AnimatedSpriteType = game.getResourceManager().getAnimatedSpriteType("RED_CIRCLE_MAN");
-        let randomSprite : AnimatedSprite = new AnimatedSprite(type, "FORWARD");
+    for (let i = 0; i < 50; i++) {
+        let type : AnimatedSpriteType = game.getResourceManager().getAnimatedSpriteType("COCKROACH");
+        let randomSprite : AnimatedSprite = new AnimatedSprite(type, "IDLE");
+        let randomX : number = Math.random() * worldWidth;
+        let randomY : number = Math.random() * worldHeight;
+        randomSprite.getPosition().set(randomX, randomY, 0, 1);
+        game.getSceneGraph().addAnimatedSprite(randomSprite);
+    }
+    for (let i = 0; i < 50; i++) {
+        let type : AnimatedSpriteType = game.getResourceManager().getAnimatedSpriteType("DENKIMUSHI");
+        let randomSprite : AnimatedSprite = new AnimatedSprite(type, "IDLE");
         let randomX : number = Math.random() * worldWidth;
         let randomY : number = Math.random() * worldHeight;
         randomSprite.getPosition().set(randomX, randomY, 0, 1);

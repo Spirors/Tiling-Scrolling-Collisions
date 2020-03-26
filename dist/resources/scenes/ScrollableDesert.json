@@ -8,6 +8,8 @@
     ],
     "spriteTypePaths" : [
         {"name":"MULTI_COLOR_BLOCK", "path" : "resources/animated_sprites/MultiColorBlock/MultiColorBlock.json"},
-        {"name":"RED_CIRCLE_MAN", "path" : "resources/animated_sprites/RedCircleMan/RedCircleMan.json" }
+        {"name":"RED_CIRCLE_MAN", "path" : "resources/animated_sprites/RedCircleMan/RedCircleMan.json" },
+        {"name":"COCKROACH", "path" : "resources/animated_sprites/Cockroach/Cockroach.json" },
+        {"name":"DENKIMUSHI", "path" : "resources/animated_sprites/Denkimushi2/Denkimushi2.json" }
     ]
 }
