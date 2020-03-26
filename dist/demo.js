@@ -94,12 +94,12 @@ var Game = function (_GameLoopTemplate_1$G) {
         _this.resourceManager = new ResourceManager_1.ResourceManager();
         _this.sceneGraph = new SceneGraph_1.SceneGraph();
         _this.renderingSystem = new WebGLGameRenderingSystem_1.WebGLGameRenderingSystem(gameCanvasId, textCanvasId);
-        _this.uiController = new UIController_1.UIController(gameCanvasId, _this.sceneGraph);
         // MAKE SURE THE SCENE GRAPH' S VIEWPORT IS PROPERLY SETUP
         var viewportWidth = document.getElementById(gameCanvasId).width;
         var viewportHeight = document.getElementById(gameCanvasId).height;
         var viewport = new Viewport_1.Viewport(viewportWidth, viewportHeight);
         _this.sceneGraph.setViewport(viewport);
+        _this.uiController = new UIController_1.UIController(gameCanvasId, _this.sceneGraph);
         return _this;
     }
 
@@ -2892,46 +2892,95 @@ exports.TiledLayer = TiledLayer;
 },{}],22:[function(require,module,exports){
 "use strict";
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 Object.defineProperty(exports, "__esModule", { value: true });
 
-var UIController = function UIController(canvasId, initScene) {
-    var _this = this;
+var UIController = function () {
+    function UIController(canvasId, initScene) {
+        var _this = this;
 
-    _classCallCheck(this, UIController);
+        _classCallCheck(this, UIController);
 
-    this.mouseDownHandler = function (event) {
-        var mousePressX = event.clientX;
-        var mousePressY = event.clientY;
-        var sprite = _this.scene.getSpriteAt(mousePressX, mousePressY);
-        console.log("mousePressX: " + mousePressX);
-        console.log("mousePressY: " + mousePressY);
-        console.log("sprite: " + sprite);
-        if (sprite != null) {
-            // START DRAGGING IT
-            _this.spriteToDrag = sprite;
-            _this.dragOffsetX = sprite.getPosition().getX() - mousePressX;
-            _this.dragOffsetY = sprite.getPosition().getY() - mousePressY;
+        this.mouseDownHandler = function (event) {
+            var mousePressX = event.clientX;
+            var mousePressY = event.clientY;
+            var sprite = _this.scene.getSpriteAt(mousePressX, mousePressY);
+            console.log("mousePressX: " + mousePressX);
+            console.log("mousePressY: " + mousePressY);
+            console.log("sprite: " + sprite);
+            if (sprite != null) {
+                // START DRAGGING IT
+                _this.spriteToDrag = sprite;
+                _this.dragOffsetX = sprite.getPosition().getX() - mousePressX;
+                _this.dragOffsetY = sprite.getPosition().getY() - mousePressY;
+            }
+        };
+        this.mouseMoveHandler = function (event) {
+            if (_this.spriteToDrag != null) {
+                _this.spriteToDrag.getPosition().set(event.clientX + _this.dragOffsetX, event.clientY + _this.dragOffsetY, _this.spriteToDrag.getPosition().getZ(), _this.spriteToDrag.getPosition().getW());
+            }
+        };
+        this.mouseUpHandler = function (event) {
+            _this.spriteToDrag = null;
+        };
+        this.spriteToDrag = null;
+        this.scene = initScene;
+        this.dragOffsetX = -1;
+        this.dragOffsetY = -1;
+        var canvas = document.getElementById(canvasId);
+        canvas.addEventListener("mousedown", this.mouseDownHandler);
+        canvas.addEventListener("mousemove", this.mouseMoveHandler);
+        canvas.addEventListener("mouseup", this.mouseUpHandler);
+        this.wasdHandler();
+    }
+
+    _createClass(UIController, [{
+        key: "wasdHandler",
+        value: function wasdHandler() {
+            var viewport = this.scene.getViewport();
+            window.onload = function () {
+                document.addEventListener('keydown', function (event) {
+                    var keyCode = event.keyCode;
+                    switch (keyCode) {
+                        case 87:
+                            //w
+                            console.log("w");
+                            if (viewport.getY() > 0) {
+                                viewport.inc(0, -1);
+                            }
+                            break;
+                        case 65:
+                            //a
+                            console.log("a");
+                            if (viewport.getX() > 0) {
+                                viewport.inc(-1, 0);
+                            }
+                            break;
+                        case 83:
+                            //s
+                            console.log("s");
+                            if (viewport.getY() < viewport.getHeight()) {
+                                viewport.inc(0, 1);
+                            }
+                            break;
+                        case 68:
+                            //d
+                            console.log("d");
+                            if (viewport.getX() < viewport.getWidth()) {
+                                viewport.inc(1, 0);
+                            }
+                            break;
+                    }
+                }, false);
+            };
         }
-    };
-    this.mouseMoveHandler = function (event) {
-        if (_this.spriteToDrag != null) {
-            _this.spriteToDrag.getPosition().set(event.clientX + _this.dragOffsetX, event.clientY + _this.dragOffsetY, _this.spriteToDrag.getPosition().getZ(), _this.spriteToDrag.getPosition().getW());
-        }
-    };
-    this.mouseUpHandler = function (event) {
-        _this.spriteToDrag = null;
-    };
-    this.spriteToDrag = null;
-    this.scene = initScene;
-    this.dragOffsetX = -1;
-    this.dragOffsetY = -1;
-    var canvas = document.getElementById(canvasId);
-    canvas.addEventListener("mousedown", this.mouseDownHandler);
-    canvas.addEventListener("mousemove", this.mouseMoveHandler);
-    canvas.addEventListener("mouseup", this.mouseUpHandler);
-};
+    }]);
+
+    return UIController;
+}();
 
 exports.UIController = UIController;
 

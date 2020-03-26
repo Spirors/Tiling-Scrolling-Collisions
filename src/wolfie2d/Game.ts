@@ -24,13 +24,14 @@ export class Game extends GameLoopTemplate {
         this.resourceManager= new ResourceManager();
         this.sceneGraph= new SceneGraph();
         this.renderingSystem= new WebGLGameRenderingSystem(gameCanvasId, textCanvasId);
-        this.uiController = new UIController(gameCanvasId, this.sceneGraph);
 
         // MAKE SURE THE SCENE GRAPH' S VIEWPORT IS PROPERLY SETUP
         let viewportWidth : number = (<HTMLCanvasElement>document.getElementById(gameCanvasId)).width;
         let viewportHeight : number = (<HTMLCanvasElement>document.getElementById(gameCanvasId)).height;
         let viewport : Viewport = new Viewport(viewportWidth, viewportHeight);
         this.sceneGraph.setViewport(viewport);
+
+        this.uiController = new UIController(gameCanvasId, this.sceneGraph);
     }
 
     public getRenderingSystem() : WebGLGameRenderingSystem {

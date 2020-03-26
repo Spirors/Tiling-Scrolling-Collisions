@@ -3,6 +3,7 @@
  */
 import {AnimatedSprite} from "../scene/sprite/AnimatedSprite"
 import {SceneGraph} from "../scene/SceneGraph"
+import { Viewport } from "../scene/Viewport";
 
 export class UIController {
     private spriteToDrag : AnimatedSprite;
@@ -20,6 +21,7 @@ export class UIController {
         canvas.addEventListener("mousedown", this.mouseDownHandler);
         canvas.addEventListener("mousemove", this.mouseMoveHandler);
         canvas.addEventListener("mouseup", this.mouseUpHandler);
+        this.wasdHandler();
     }
 
     public mouseDownHandler = (event : MouseEvent) : void => {
@@ -48,5 +50,40 @@ export class UIController {
 
     public mouseUpHandler = (event : MouseEvent) : void => {
         this.spriteToDrag = null;
+    }
+
+    public wasdHandler(){
+        let viewport = this.scene.getViewport();
+        window.onload = function() {
+            document.addEventListener('keydown', function(event) {
+                let keyCode = event.keyCode;
+                switch (keyCode) {
+                    case 87: //w
+                        console.log("w");
+                        if (viewport.getY() > 0){
+                            viewport.inc(0, -1);
+                        }
+                        break;
+                    case 65: //a
+                        console.log("a");
+                        if (viewport.getX() > 0){
+                            viewport.inc(-1, 0);
+                        }
+                        break;
+                    case 83: //s
+                        console.log("s");
+                        if (viewport.getY() < viewport.getHeight()){
+                            viewport.inc(0, 1);
+                        }
+                        break;
+                    case 68: //d
+                        console.log("d");
+                        if (viewport.getX() < viewport.getWidth()){
+                            viewport.inc(1, 0);
+                        }
+                        break;
+                }
+            }, false);
+        }
     }
 }

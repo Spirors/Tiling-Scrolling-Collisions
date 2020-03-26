@@ -54,8 +54,8 @@ export class WebGLGameSpriteRenderer extends WebGLGameRenderingComponent {
         let spriteHeight : number = spriteType.getSpriteHeight();
         let spriteXInPixels : number = sprite.getPosition().getX() + (spriteWidth/2);
         let spriteYInPixels : number = sprite.getPosition().getY() + (spriteHeight/2);
-        let spriteXTranslate : number = (spriteXInPixels - (canvasWidth/2))/(canvasWidth/2);
-        let spriteYTranslate : number = (spriteYInPixels - (canvasHeight/2))/(canvasHeight/2);
+        let spriteXTranslate : number = ((spriteXInPixels - (canvasWidth/2))/(canvasWidth/2));
+        let spriteYTranslate : number = ((spriteYInPixels - (canvasHeight/2))/(canvasHeight/2));
         this.meshTranslate.setX(spriteXTranslate);
         this.meshTranslate.setY(-spriteYTranslate);
 
@@ -86,6 +86,7 @@ export class WebGLGameSpriteRenderer extends WebGLGameRenderingComponent {
         let a_PositionLocation : GLuint = this.webGLAttributeLocations.get(this.A_POSITION);
         webGL.vertexAttribPointer(a_PositionLocation, this.FLOATS_PER_TEXTURE_COORDINATE, webGL.FLOAT, false, this.TOTAL_BYTES, this.VERTEX_POSITION_OFFSET);
         webGL.enableVertexAttribArray(a_PositionLocation);
+
         let a_TexCoordLocation : GLuint = this.webGLAttributeLocations.get(this.A_TEX_COORD);
         webGL.vertexAttribPointer(a_TexCoordLocation, this.FLOATS_PER_TEXTURE_COORDINATE, webGL.FLOAT, false, this.TOTAL_BYTES, this.TEXTURE_COORDINATE_OFFSET);
         webGL.enableVertexAttribArray(a_TexCoordLocation);
