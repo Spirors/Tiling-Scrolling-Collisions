@@ -25,15 +25,15 @@ game.getResourceManager().loadScene(DESERT_SCENE_PATH, game.getSceneGraph(), gam
     var worldHeight = world[0].getRows() * world[0].getTileSet().getTileHeight();
     for (var i = 0; i < 50; i++) {
         var type = game.getResourceManager().getAnimatedSpriteType("COCKROACH");
-        var randomSprite = new AnimatedSprite_1.AnimatedSprite(type, "IDLE");
+        var randomSprite = new AnimatedSprite_1.AnimatedSprite(type, "WALKING");
         var randomX = Math.random() * worldWidth;
         var randomY = Math.random() * worldHeight;
         randomSprite.getPosition().set(randomX, randomY, 0, 1);
         game.getSceneGraph().addAnimatedSprite(randomSprite);
     }
     for (var _i = 0; _i < 50; _i++) {
-        var _type = game.getResourceManager().getAnimatedSpriteType("DENKIMUSHI");
-        var _randomSprite = new AnimatedSprite_1.AnimatedSprite(_type, "IDLE");
+        var _type = game.getResourceManager().getAnimatedSpriteType("FIREFLY");
+        var _randomSprite = new AnimatedSprite_1.AnimatedSprite(_type, "WALKING");
         var _randomX = Math.random() * worldWidth;
         var _randomY = Math.random() * worldHeight;
         _randomSprite.getPosition().set(_randomX, _randomY, 0, 1);

@@ -7,9 +7,8 @@
         {"name":"TILED_LAYER_FRAGMENT_SHADER", "path" : "resources/shaders/tiledlayer/TiledLayer.fs"}
     ],
     "spriteTypePaths" : [
-        {"name":"MULTI_COLOR_BLOCK", "path" : "resources/animated_sprites/MultiColorBlock/MultiColorBlock.json"},
-        {"name":"RED_CIRCLE_MAN", "path" : "resources/animated_sprites/RedCircleMan/RedCircleMan.json" },
         {"name":"COCKROACH", "path" : "resources/animated_sprites/Cockroach/Cockroach.json" },
+        {"name":"FIREFLY", "path" : "resources/animated_sprites/Firefly2/Firefly2.json" },
         {"name":"DENKIMUSHI", "path" : "resources/animated_sprites/Denkimushi2/Denkimushi2.json" }
     ]
 }
