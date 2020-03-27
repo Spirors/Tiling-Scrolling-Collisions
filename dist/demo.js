@@ -2959,6 +2959,8 @@ var UIController = function () {
         key: "wasdHandler",
         value: function wasdHandler() {
             var viewport = this.scene.getViewport();
+            var worldHeight = 3200;
+            var worldWidth = 3200;
             window.onload = function () {
                 document.addEventListener('keydown', function (event) {
                     var keyCode = event.keyCode;
@@ -2967,28 +2969,28 @@ var UIController = function () {
                             //w
                             console.log("w");
                             if (viewport.getY() > 0) {
-                                viewport.inc(0, -3);
+                                viewport.inc(0, -5);
                             }
                             break;
                         case 65:
                             //a
                             console.log("a");
                             if (viewport.getX() > 0) {
-                                viewport.inc(-3, 0);
+                                viewport.inc(-5, 0);
                             }
                             break;
                         case 83:
                             //s
                             console.log("s");
-                            if (viewport.getY() < viewport.getHeight()) {
-                                viewport.inc(0, 3);
+                            if (viewport.getY() < worldHeight) {
+                                viewport.inc(0, 5);
                             }
                             break;
                         case 68:
                             //d
                             console.log("d");
-                            if (viewport.getX() < viewport.getWidth()) {
-                                viewport.inc(3, 0);
+                            if (viewport.getX() < worldWidth) {
+                                viewport.inc(5, 0);
                             }
                             break;
                     }
