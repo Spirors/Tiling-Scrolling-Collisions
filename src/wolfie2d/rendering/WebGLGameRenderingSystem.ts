@@ -4,7 +4,7 @@
 import { TextRenderer } from './TextRenderer'
 import { WebGLGameTiledLayerRenderer } from './WebGLGameTiledLayerRenderer'
 import { WebGLGameSpriteRenderer } from './WebGLGameSpriteRenderer'
-import { WebGLGameTexture } from './WebGLGameTexture';
+import { WebGLGameTexture } from './WebGLGameTexture'
 import { AnimatedSprite } from '../scene/sprite/AnimatedSprite'
 import { TiledLayer } from '../scene/tiles/TiledLayer'
 import { Viewport } from '../scene/Viewport'

@@ -1,13 +1,17 @@
 import {SceneObject} from '../SceneObject'
 import {AnimatedSpriteType} from './AnimatedSpriteType'
+import { BugAI } from '../../ai/BugAI';
+import { CockroachAI } from '../../ai/CockroachAI';
+import { FireflyAI } from '../../ai/FireflyAI';
 
 export class AnimatedSprite extends SceneObject {
     private spriteType : AnimatedSpriteType;
     private state : string;
     private animationFrameIndex : number;
     private frameCounter : number;
+    private ai : BugAI;
     
-    public constructor(initSpriteType : AnimatedSpriteType, initState : string) {
+    public constructor(initSpriteType : AnimatedSpriteType, initState : string, spriteName : string) {
         super();
         this.spriteType = initSpriteType;
         
@@ -15,6 +19,13 @@ export class AnimatedSprite extends SceneObject {
         this.state = initState;
         this.animationFrameIndex = 0;
         this.frameCounter = 0;
+        if (spriteName == "COCKROACH") {
+            this.ai = new CockroachAI();
+        } else if (spriteName == "FIREFLY") {
+            this.ai = new FireflyAI();
+        } else {
+            this.ai = null;
+        }
     }
 
     public getAnimationFrameIndex() : number {
@@ -41,7 +52,7 @@ export class AnimatedSprite extends SceneObject {
     
     public update(delta : number) : void {
         this.frameCounter++;
-        
+
         // HAVE WE GONE PAST THE LAST FRAME IN THE ANIMATION?
         var currentAnimation = this.spriteType.getAnimation(this.state);
         var currentFrame = currentAnimation[this.animationFrameIndex];

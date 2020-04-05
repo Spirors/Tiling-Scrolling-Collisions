@@ -30,7 +30,7 @@ game.getResourceManager().loadScene(DESERT_SCENE_PATH,
     let worldHeight : number = world[0].getRows() * world[0].getTileSet().getTileHeight();
     for (let i = 0; i < 50; i++) {
         let type : AnimatedSpriteType = game.getResourceManager().getAnimatedSpriteType("COCKROACH");
-        let randomSprite : AnimatedSprite = new AnimatedSprite(type, "WALKING");
+        let randomSprite : AnimatedSprite = new AnimatedSprite(type, "WALKING", "COCKROACH");
         let randomX : number = Math.random() * worldWidth;
         let randomY : number = Math.random() * worldHeight;
         randomSprite.getPosition().set(randomX, randomY, 0, 1);
@@ -38,12 +38,18 @@ game.getResourceManager().loadScene(DESERT_SCENE_PATH,
     }
     for (let i = 0; i < 50; i++) {
         let type : AnimatedSpriteType = game.getResourceManager().getAnimatedSpriteType("FIREFLY");
-        let randomSprite : AnimatedSprite = new AnimatedSprite(type, "WALKING");
+        let randomSprite : AnimatedSprite = new AnimatedSprite(type, "WALKING", "FIREFLY");
         let randomX : number = Math.random() * worldWidth;
         let randomY : number = Math.random() * worldHeight;
         randomSprite.getPosition().set(randomX, randomY, 0, 1);
         game.getSceneGraph().addAnimatedSprite(randomSprite);
     }
+
+    // MAIN CHARACTER BUG
+    let type : AnimatedSpriteType = game.getResourceManager().getAnimatedSpriteType("DENKIMUSHI");
+    let mainCharacter : AnimatedSprite = new AnimatedSprite(type, "WALKING", "DENKIMUSHI");
+    mainCharacter.getPosition().set(200, 200, 0, 1);
+    game.getSceneGraph().addAnimatedSprite(mainCharacter);
 
     // NOW ADD TEXT RENDERING. WE ARE GOING TO RENDER 3 THINGS:
         // NUMBER OF SPRITES IN THE SCENE

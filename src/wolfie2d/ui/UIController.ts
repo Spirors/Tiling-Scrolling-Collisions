@@ -4,7 +4,6 @@
 import {AnimatedSprite} from "../scene/sprite/AnimatedSprite"
 import {SceneGraph} from "../scene/SceneGraph"
 import { Viewport } from "../scene/Viewport";
-import { TiledLayer } from "../scene/tiles/TiledLayer";
 
 export class UIController {
     private spriteToDrag : AnimatedSprite;
@@ -53,7 +52,7 @@ export class UIController {
         this.spriteToDrag = null;
     }
 
-    public wasdHandler(){
+    public wasdHandler() {
         let viewport : Viewport = this.scene.getViewport();
         let worldHeight = 3200;
         let worldWidth = 3200;
@@ -62,25 +61,21 @@ export class UIController {
                 let keyCode = event.keyCode;
                 switch (keyCode) {
                     case 87: //w
-                        console.log("w");
                         if (viewport.getY() > 0) {
                             viewport.inc(0, -5);
                         }
                         break;
                     case 65: //a
-                        console.log("a");
                         if (viewport.getX() > 0) {
                             viewport.inc(-5, 0);
                         }
                         break;
                     case 83: //s
-                        console.log("s");
                         if (viewport.getY() < worldHeight) {
                             viewport.inc(0, 5);
                         }
                         break;
                     case 68: //d
-                        console.log("d");
                         if (viewport.getX() < worldWidth) {
                             viewport.inc(5, 0);
                         }
