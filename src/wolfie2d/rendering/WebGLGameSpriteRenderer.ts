@@ -66,6 +66,10 @@ export class WebGLGameSpriteRenderer extends WebGLGameRenderingComponent {
         let scaleY : number = 2*spriteHeight/defaultHeight;
         this.meshScale.set(scaleX, scaleY, 0.0, 0.0);//1.0, 1.0);
 
+        this.meshRotate = sprite.getRotation();
+        this.meshScale.setX(this.meshScale.getX()*sprite.getScale().getX());
+        this.meshScale.setY(this.meshScale.getY()/sprite.getScale().getY());
+
         // @todo - COMBINE THIS WITH THE ROTATE AND SCALE VALUES FROM THE SPRITE
         MathUtilities.identity(this.meshTransform);
         MathUtilities.model(this.meshTransform, this.meshTranslate, this.meshRotate, this.meshScale);

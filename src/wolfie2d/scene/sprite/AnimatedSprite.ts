@@ -1,15 +1,17 @@
 import {SceneObject} from '../SceneObject'
 import {AnimatedSpriteType} from './AnimatedSpriteType'
-import { BugAI } from '../../ai/BugAI';
-import { CockroachAI } from '../../ai/CockroachAI';
-import { FireflyAI } from '../../ai/FireflyAI';
+import { BugAI } from '../../ai/BugAI'
+import { CockroachAI } from '../../ai/CockroachAI'
+import { FireflyAI } from '../../ai/FireflyAI'
 
 export class AnimatedSprite extends SceneObject {
     private spriteType : AnimatedSpriteType;
     private state : string;
     private animationFrameIndex : number;
     private frameCounter : number;
+    private frames : number = 0;
     private ai : BugAI;
+    private direction : number = 0;
     
     public constructor(initSpriteType : AnimatedSpriteType, initState : string, spriteName : string) {
         super();
@@ -24,7 +26,7 @@ export class AnimatedSprite extends SceneObject {
         } else if (spriteName == "FIREFLY") {
             this.ai = new FireflyAI();
         } else {
-            this.ai = null;
+            this.ai = new BugAI();
         }
     }
 
@@ -52,6 +54,7 @@ export class AnimatedSprite extends SceneObject {
     
     public update(delta : number) : void {
         this.frameCounter++;
+        this.frames++;
 
         // HAVE WE GONE PAST THE LAST FRAME IN THE ANIMATION?
         var currentAnimation = this.spriteType.getAnimation(this.state);
@@ -62,6 +65,11 @@ export class AnimatedSprite extends SceneObject {
                 this.animationFrameIndex = 0;
             }
             this.frameCounter = 0;
+        }
+        this.ai.move(this, this.direction);
+        if (this.frames % 30 == 0){
+            this.direction = Math.floor(Math.random() * 4);
+            this.ai.update(this, this.direction);
         }
     }
 
